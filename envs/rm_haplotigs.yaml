@@ -3,4 +3,5 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - purge_haplotigs
+  - purge_dupls
+  - minimap2
