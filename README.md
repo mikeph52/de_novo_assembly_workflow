@@ -1,5 +1,6 @@
 # De novo genome assembly of mammalian species from Oxford Nanopore reads workflow
-### Mike Philippakis,_Hellenic Center for Marine Research_ 2026
+### Mike Philippakis
+_Hellenic Center for Marine Research_ 2026
 
 
 ## Intro
