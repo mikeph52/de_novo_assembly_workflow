@@ -9,15 +9,34 @@ This workflow is based on the one used in _De Novo Genome Assembly for an Endang
 ### Project structure
 ```bash
 .
-|-- data
-|-- logs
-|-- README.md
-|-- results
-|-- scripts
-|-- snakefile
-`-- workflow.sh
+├── config.yaml
+├── data
+├── envs
+│   ├── annotation.yaml
+│   ├── assembly.yaml
+│   ├── decontamination.yaml
+│   ├── masking.yaml
+│   ├── polish.yaml
+│   ├── qc.yaml
+│   ├── rm_haplotigs.yaml
+│   └── trim_adapters.yaml
+├── logs
+├── README.md
+├── results
+├── rules
+│   ├── annotation.smk
+│   ├── assembly.smk
+│   ├── decontamination.smk
+│   ├── masking.smk
+│   ├── polish.smk
+│   ├── qc.smk
+│   ├── rm_haplotigs.smk
+│   └── trim_adapters.smk
+├── scripts
+├── setup.sh
+├── snakefile
+└── workflow.sh
 
-4 directories, 3 files
 ```	
 ### Pipeline structure
 ```bash
@@ -25,7 +44,19 @@ snakemake
 ```
 
 ### Depedencies
-
+- **Flye**
+- **Hifiasm**
+- **Porechop**
+- **Medaka**
+- **Purge_haplotigs**
+- **RepeatMasker**
+- **QUAST**
+- **BUSCO**
+- **TOGA**
+- **Kraken 2**
+- **Seqkit**
+- **NCBI Datasets** (_Optional_)
+- **BlobTolkit** (_Optional_)
 
 ## Installation
 
