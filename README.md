@@ -24,6 +24,7 @@ This workflow is based on the one used in _De Novo Genome Assembly for an Endang
 ├── rules
 │   ├── annotation.smk
 │   ├── assembly.smk
+│   ├── custom_k2_db.smk
 │   ├── decontamination.smk
 │   ├── masking.smk
 │   ├── polish.smk
@@ -31,6 +32,7 @@ This workflow is based on the one used in _De Novo Genome Assembly for an Endang
 │   ├── rm_haplotigs.smk
 │   └── trim_adapters.smk
 ├── scripts
+│   └── reset.sh
 ├── setup.sh
 ├── snakefile
 └── workflow.sh
@@ -46,7 +48,7 @@ snakemake
 - **Hifiasm**
 - **Porechop**
 - **Medaka**
-- **Purge_haplotigs**
+- **Purge_dups**
 - **RepeatMasker**
 - **QUAST**
 - **BUSCO**

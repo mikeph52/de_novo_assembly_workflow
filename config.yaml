@@ -1,18 +1,59 @@
+# ─── Genome Assembly Workflow — Configuration ─────────────────────────────────
+
+# List of sample IDs (must match BAM filenames under data/<sample>.bam)
+samples:
+  - sample1
+  - sample2
+
+# Assembler to use: "flye" or "hifiasm"
+assembler: flye
+
+# Estimated genome size (for flye and QUAST)
+genome_size: "500m"
+
+threads:
+  samtools:      16
+  porechop:      8
+  flye:          32
+  hifiasm:       32
+  medaka:        8
+  purge_dups:    16
+  kraken2:       16
+  repeatmasker:  16
+  annotation:    16
+  nanoplot:      4
+  quast:         8
+
 flye:
+  read_type: "--nano-hq"    # --nano-raw | --nano-hq | --pacbio-raw | --pacbio-hifi
   extra_args: ""
-  
+
+
 hifiasm:
   extra_args: ""
 
 medaka:
-  model: "r1041_e82_400bps_sup_v5.0.0" # what flowcell we have?
+  model: "r1041_e82_400bps_hac_g632"   # i dkno if we need to use it
+  extra_args: ""
+
+purge_dups:
   extra_args: ""
 
 kraken2:
+  db: "data/kraken2_db"   # path to Kraken2 database directory
+  confidence: "0.1"
   extra_args: ""
 
-threads:
-  hifiasm: 20
-  flye: 38
-  medaka: 8
-  kraken2: 20
+repeatmasker:
+  species: "fungi"          # NCBI species name, OR leave blank and set custom_lib
+  custom_lib: ""            # path to custom repeat library FASTA (overrides species)
+  extra_args: "-nolow"
+
+annotation:
+  species_name: "my_organism"
+  rnaseq_bam:  ""           
+  protein_fa:  ""           
+  extra_args:  ""
+
+quast:
+  extra_args: ""
