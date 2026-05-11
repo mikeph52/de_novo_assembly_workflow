@@ -1,17 +1,53 @@
 #!/bin/bash
 
+set -euo pipefail
+
+echo "-------------------------------------"
+echo "|De novo assembly snakemake workflow|"
+echo "|         by mikeph52, 2026         |"
+echo "-------------------------------------"
+
+read -p "Enter project name: " PROJECT
+
+if [[ -z "$PROJECT" ]]; then
+    echo "Project name cannot be empty."
+    exit 1
+fi
+
+echo "The following changes will happen:"
+echo " - Name project $PROJECT"
+echo " - Create directories: data/ logs/ results/ scripts/"
+echo " - Create subfolders on: data/ results/"
+echo " - Check conda availability"
+echo " - Install snakemake if it is not installed"
+echo " - Move setup.sh to scripts/"
+
+read -p "Continue? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
+
+# STEP 1
+echo "Naming project '$PROJECT'..."
+mv ~/de_novo_assembly_workflow ~/"$PROJECT"
+# STEP 2
 echo "Creating directories: data/ logs/ results/ scripts/..."
-
 mkdir data logs results scripts
-
+# STEP 3
+echo "Creating subdfolders on: data/ results/..."
+mkdir -p data/kraken2 data/
+mkdir -p results/sort_bam results/trim_adapters results/assembly results/purge_dups results/polish 
+mkdir -p results/assembly/flye results/assembly/hifiasm
+# STEP 4
 echo "Moving setup.sh to scripts/..."
-
 mv setup.sh scripts/
-
+# STEP 5
+echo "Checking conda installation..."
+if ! command -v conda &> /dev/null; then
+    echo "Error: conda is not installed. Please install conda and re-run the setup.sh script"
+    echo "For more information visit this link:https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html"
+    exit 1
+fi
+echo "conda found: $(conda --version)"
+# STEP 6
 echo "Installing snakemake..."
-
 conda create -n snakemake -c conda-forge -c bioconda snakemake mamba -y
-
-#conda activate snakemake
 
 echo "Process finished"

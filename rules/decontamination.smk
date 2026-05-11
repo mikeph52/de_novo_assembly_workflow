@@ -20,5 +20,4 @@ rule decontamination:
             --output {params.outdir}/kraken2.output \
             --report {params.outdir}/kraken2.report \
             --unclassified-out {input.fa}
-
         """
