@@ -26,7 +26,9 @@ read -p "Continue? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][e
 
 # STEP 1
 echo "Naming project '$PROJECT'..."
-mv ~/de_novo_assembly_workflow ~/"$PROJECT"
+cd ..
+mv de_novo_assembly_workflow "$PROJECT"
+cd "$PROJECT"
 # STEP 2
 echo "Creating directories: data/ logs/ results/ scripts/..."
 mkdir data logs results scripts
@@ -50,4 +52,5 @@ echo "conda found: $(conda --version)"
 echo "Installing snakemake..."
 conda create -n snakemake -c conda-forge -c bioconda snakemake mamba -y
 
+echo "Cd out of the folder and enter again to refresh the project title."
 echo "Process finished"
