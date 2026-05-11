@@ -16,7 +16,7 @@ fi
 
 echo "The following changes will happen:"
 echo " - Name project $PROJECT"
-echo " - Create directories: data/ logs/ results/ scripts/"
+echo " - Create directories: data/ logs/ results/"
 echo " - Create subfolders on: data/ results/"
 echo " - Check conda availability"
 echo " - Install snakemake if it is not installed"
@@ -30,27 +30,30 @@ cd ..
 mv de_novo_assembly_workflow "$PROJECT"
 cd "$PROJECT"
 # STEP 2
-echo "Creating directories: data/ logs/ results/ scripts/..."
-mkdir data logs results scripts
+echo "Creating directories: data/ logs/ results/..."
+mkdir data logs results
 # STEP 3
 echo "Creating subdfolders on: data/ results/..."
 mkdir -p data/kraken2 data/
 mkdir -p results/sort_bam results/trim_adapters results/assembly results/purge_dups results/polish 
 mkdir -p results/assembly/flye results/assembly/hifiasm
 # STEP 4
-echo "Moving setup.sh to scripts/..."
-mv setup.sh scripts/
-# STEP 5
 echo "Checking conda installation..."
 if ! command -v conda &> /dev/null; then
     echo "Error: conda is not installed. Please install conda and re-run the setup.sh script"
-    echo "For more information visit this link:https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html"
+    echo "For more information visit this link:https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html" 
+    rm -rf data logs results
+    cd ..
+    mv "$PROJECT" de_novo_assembly_workflow
     exit 1
 fi
 echo "conda found: $(conda --version)"
-# STEP 6
+# STEP 5
 echo "Installing snakemake..."
 conda create -n snakemake -c conda-forge -c bioconda snakemake mamba -y
-
+# STEP 6
+echo "Moving setup.sh to scripts/..."
+mv setup.sh scripts/
 echo "Cd out of the folder and enter again to refresh the project title."
+
 echo "Process finished"
