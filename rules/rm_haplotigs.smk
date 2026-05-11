@@ -10,3 +10,9 @@ rule purge_haplotigs:
     threads: config["threads"]["purge_dups"]
     conda:  "envs/rm_haplotigs.yaml"
     log:    "logs/purge_dups.log"
+    shell:
+        """
+        echo "not finished"
+
+        """
+    

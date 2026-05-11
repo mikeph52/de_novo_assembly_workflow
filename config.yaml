@@ -5,10 +5,14 @@ hifiasm:
   extra_args: ""
 
 medaka:
-  model: "r1041_e82_400bps_sup_v5.0.0"  # adjust to your flowcell/basecaller
+  model: "r1041_e82_400bps_sup_v5.0.0" # what flowcell we have?
+  extra_args: ""
+
+kraken2:
   extra_args: ""
 
 threads:
   hifiasm: 20
   flye: 38
   medaka: 8
+  kraken2: 20
