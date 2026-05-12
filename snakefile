@@ -19,7 +19,7 @@ include: "rules/qc.smk"
 # NEEDS UPDATE, DO NOT RUN!!!!
 rule all:
     input:
-        expand("results/qc/nanoplot/{sample}_raw/NanoStats.txt",  sample=SAMPLES),
+        expand("results/qc/nanoplot/{sample}_raw/NanoStats.txt", sample=SAMPLES),
 
         expand("results/trim_adapters/{sample}_trimmed.fastq.gz", sample=SAMPLES),
 
@@ -40,3 +40,12 @@ rule all:
         # MultiQC summary need to add BUSCO
         #"results/qc/multiqc/multiqc_report.html",
         # NEEDS UPDATE, DO NOT RUN!!!!
+# DO NOT RUN!!!!
+# DO NOT RUN!!!!
+# DO NOT RUN!!!!
+# DO NOT RUN!!!!
+# DO NOT RUN!!!!
+# DO NOT RUN!!!!
+# DO NOT RUN!!!!
+# DO NOT RUN!!!!
+# DO NOT RUN!!!!
