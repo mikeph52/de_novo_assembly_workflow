@@ -6,7 +6,7 @@ rule flye_assembly:
         info   = "results/assembly/flye/{sample}_assembly_info.txt",
         graph  = "results/assembly/flye/{sample}_assembly_graph.gfa",
     params:
-        outdir    = "results/assembly/flye",
+        outdir = "results/assembly/flye",
         read_type = config["flye"]["read_type"],
         genome_sz = config["genome_size"],
         extra     = config["flye"]["extra_args"],
