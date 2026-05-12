@@ -7,7 +7,7 @@ rule decontamination:
     params:
         outdir = "results/decontamination",
         extra = config["kraken2"]["extra_args"]
-        confidence = "0.1" # change it to how accurate you want the run to be
+        confidence = "0.1" # 0.1 for low conf, 0.2-0.5 for better results
     threads: config["threads"]["kraken2"]
     conda: "envs/decontamination.yaml"
     log: "logs/decontamination.log"
