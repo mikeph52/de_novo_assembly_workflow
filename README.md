@@ -13,6 +13,8 @@ This workflow is based on the one used in _De Novo Genome Assembly for an Endang
 .
 ├── config.yaml
 ├── data
+├── docs
+│   └── snakemake_workflow.png
 ├── envs
 │   ├── annotation.yaml
 │   ├── assembly.yaml
@@ -22,6 +24,7 @@ This workflow is based on the one used in _De Novo Genome Assembly for an Endang
 │   ├── qc.yaml
 │   ├── rm_haplotigs.yaml
 │   └── trim_adapters.yaml
+├── LICENSE
 ├── logs
 ├── README.md
 ├── results
