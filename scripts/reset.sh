@@ -19,6 +19,6 @@ echo ""
 read -p "Continue? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
 
 cd ..
-rm -rf data logs results 
+rm -rf data/ logs/ results/ 
 
 echo "Process finished"
