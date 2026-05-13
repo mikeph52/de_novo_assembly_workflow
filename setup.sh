@@ -14,7 +14,7 @@ if [[ -z "$PROJECT" ]]; then
     exit 1
 fi
 # save project name to scripts/
-echo "[Project_name]: $PROJECT" > scripts/.setup.env
+echo "$PROJECT" > scripts/.setup.env
 
 echo "The following changes will happen:"
 echo " - Name project $PROJECT"
