@@ -4,6 +4,10 @@
 This workflow is based on the one used in _De Novo Genome Assembly for an Endangered Lemur Using Portable Nanopore Sequencing in Rural Madagascar_(Hauff et. all, 2025).
 
 ## Workflow
+### Pipeline structure
+
+![](docs/snakemake_workflow.png)
+
 ### Project structure
 ```bash
 .
@@ -36,12 +40,7 @@ This workflow is based on the one used in _De Novo Genome Assembly for an Endang
 ├── setup.sh
 ├── snakefile
 └── workflow.sh
-
 ```	
-### Pipeline structure
-```bash
-snakemake
-```
 
 ### Depedencies
 - **Flye**
