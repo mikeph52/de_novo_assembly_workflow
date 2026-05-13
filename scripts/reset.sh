@@ -19,6 +19,12 @@ echo ""
 read -p "Continue? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
 
 cd ..
+
 rm -rf data/ logs/ results/ 
+
+PROJECT=$(cat scripts/.setup.env)
+
+cd ..
+mv "$PROJECT" de_novo_genome_assembly
 
 echo "Process finished"

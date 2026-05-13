@@ -13,6 +13,8 @@ if [[ -z "$PROJECT" ]]; then
     echo "Project name cannot be empty."
     exit 1
 fi
+# save project name to scripts/
+echo "[Project_name]: $PROJECT" > scripts/.setup.env
 
 echo "The following changes will happen:"
 echo " - Name project $PROJECT"
