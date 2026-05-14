@@ -1,7 +1,8 @@
-# De novo genome assembly of mammalian species from Oxford Nanopore reads workflow
+# De novo genome assembly workflow for mammalian species using long reads workflow
 
-## Intro
-This workflow is based on the one used in _De Novo Genome Assembly for an Endangered Lemur Using Portable Nanopore Sequencing in Rural Madagascar_(Hauff et. all, 2025).
+## Introduction
+This workflow supports sequecing data from both Oxford Nanopore and Pacbio HiFi sequencers, built with snakemake for maximum compatibility.
+The pipeline is based on the one used in _De Novo Genome Assembly for an Endangered Lemur Using Portable Nanopore Sequencing in Rural Madagascar_(Hauff et. all, 2025).
 
 ## Workflow
 ### Pipeline structure
@@ -44,6 +45,34 @@ This workflow is based on the one used in _De Novo Genome Assembly for an Endang
 ├── snakefile
 └── workflow.sh
 ```	
+### System requirements
+The workflow works mainly on **Linux x86-64 HPC** systems. It's currently being tested on a macOS system with M4 ARM CPU.
+
+The total resources needed are based on the size of the data and the genome that is been analyzed.
+
+**Recomended specs**
+
+- GNU Linux 64 bit
+- x86-64 CPU Architecture, Min: 32 Cores
+- A lot of RAM, Min: 120GB
+- Slurm Workload Manager 
+
+Some recomended options on threads:
+(These are the default settings in `config.yaml`)
+
+| Tool | Threads |
+|------|---------|
+| samtools | 16 |
+| porechop | 8 |
+| flye | 32 |
+| hifiasm | 32 |
+| medaka | 8 |
+| purge_dups | 16 |
+| kraken2 | 16 |
+| repeatmasker | 16 |
+| annotation | 16 |
+| nanoplot | 4 |
+| quast | 8 |
 
 ### Depedencies
 - **Flye**
@@ -61,6 +90,81 @@ This workflow is based on the one used in _De Novo Genome Assembly for an Endang
 - **BlobTolkit** (_Optional_)
 
 ## Installation
+### 1. Conda
+In order to run the workflow, conda must be installed. Bellow are the full steps for installing and setup conda and bioconda for Linux machines. If you want to experiment with other configurations and distros, [here are the instructions](https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html#regular-installation).
+
+_Taken from the official conda documentation._
+
+**Download the installer**:
+- Miniconda installer for Linux --> [link](https://docs.anaconda.com/miniconda/)
+- Anaconda Distribution installer for Linux --> [link](https://www.anaconda.com/download/)
+- Miniforge installer for Linux --> [link](https://conda-forge.org/download/)
+
+**Verify your installer hashes** --> [link](https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html#hash-verification)
+
+**Run this command**:
+```bash
+bash <conda-installer-name>-latest-Linux-x86_64.sh
+```
+`conda-installer-name` will be one of "Miniconda3", "Anaconda", or "Miniforge3".
+
+Then follow instructions on screen.
+
+**Verify installation with**:
+```bash
+conda list
+```
+**Setup Bioconda**:
+
+To add the bioconda channel on `~/.condarc` file, run the following in the correct order:
+```bash
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+```
+
+Even if you have a previous bioconda setup, it is recommended to re-run these commands.
+### 2. Setup workflow
+
+**Download the repository**:
+You can simply `git clone` the repo, or download it manually from GitHub or the new GitHub CLI app.
+```bash
+git clone https://github.com/mikeph52/de_novo_assembly_workflow.git
+```
+**Run setup.sh from inside the folder**:
+```bash
+./setup.sh
+# or
+bash setup.sh
+```
+Follow instructions. The `setup.sh` script enables you to rename the folder to your liking, creates importand project folders, checks for an existent conda installation and installs snakemake if it's not installed.
+
+Here's an example of the script:
+```
+-------------------------------------
+|De novo assembly snakemake workflow|
+|         by mikeph52, 2026         |
+-------------------------------------
+Enter project name: pseudomonas_syringae
+The following changes will happen:
+ - Name project pseudomonas_syringae
+ - Create directories: data/ logs/ results/
+ - Create subfolders on: data/ results/
+ - Check conda availability
+ - Install snakemake if it is not installed
+ - Move setup.sh to scripts/
+Continue? (Y/N): 
+```
+### 3. Reset installation
+If you want to revert changes made by the `setup.sh` script, run the `reset.sh` inside the `scripts/` folder.
+
+## Usage
+
+### Under Construction :-(
+
+
+
+
 
 ## Acknowledgements
 
