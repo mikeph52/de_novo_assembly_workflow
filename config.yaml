@@ -1,31 +1,36 @@
-# List of sample IDs (must match BAM filenames under data/<sample>.bam)
+# List of sample IDs --> .BAM
+# Maybe change the variable i dkno
 samples:
   - sample1
   - sample2
 
-# Assembler to use: "flye" or "hifiasm"
+# Select what assembler you want to use by uncomment with #
 assembler: flye
+#assembler: hifiasm
 
 # Estimated genome size (for flye and QUAST)
 genome_size: "500m"
 
 threads:
-  samtools:      16
-  porechop:      8
-  flye:          32
-  hifiasm:       32
-  medaka:        8
-  purge_dups:    16
-  kraken2:       16
-  repeatmasker:  16
-  annotation:    16
-  nanoplot:      4
-  quast:         8
+  samtools: 16
+  porechop: 8
+  flye: 32
+  hifiasm: 32
+  medaka: 8 # still idkno if im gonna use it
+  purge_dups: 16
+  kraken2: 16
+  repeatmasker: 16
+  annotation: 16
+  nanoplot: 4
+  quast: 8
+  busco: 16
+  multiqc: 8
+  nanostat: 8 # i found an alternative: cramino https://github.com/wdecoster/cramino
+
 
 flye:
   read_type: "--nano-hq"    # --nano-raw | --nano-hq | --pacbio-raw | --pacbio-hifi
   extra_args: ""
-
 
 hifiasm:
   extra_args: ""
@@ -38,13 +43,13 @@ purge_dups:
   extra_args: ""
 
 kraken2:
-  db: "data/kraken2_db"   # path to Kraken2 db
-  confidence: "0.1"
+  db: "data/kraken2_db" # path to Kraken2 db
+  confidence: "0.1" # 0.1 for low conf, 0.2-0.5 for better results
   extra_args: ""
 
 repeatmasker:
-  species: "fungi"          # NCBI species name or leave blank and set custom_lib
-  custom_lib: ""            # path to custom repeat library FASTA
+  species: "fungi" # NCBI species name or leave blank and set custom_lib
+  custom_lib: ""   # path to custom repeat library FASTA
   extra_args: "-nolow"
 
 annotation:

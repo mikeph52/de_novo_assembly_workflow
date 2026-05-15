@@ -3,17 +3,21 @@ import os
 configfile: "config/config.yaml"
 
 # samples
-SAMPLES = config["samples"]                  # list of sample IDs in config
-ASSEMBLER = config.get("assembler", "flye")  # "flye" or "hifiasm"
+SAMPLES = config["samples"]
+# Select what assembler you want to use by uncomment with #
+ASSEMBLER = config.get("assembler", "flye")
+#ASSEMBLER = config.get("assembler", "hifiasm")
 # NEEDS UPDATE, DO NOT RUN!!!!
 # rules
+# If you want to skip any steps, just comment the rules bellow
 include: "rules/trim_adapters.smk"
 include: "rules/assembly.smk"
 include: "rules/polish.smk"
 include: "rules/rm_haplotigs.smk"
+#include: "rules/custom_k2_db.smk"   # uncomment if you want to built a custom db for kraken2
 include: "rules/decontamination.smk"
 include: "rules/masking.smk"
-include: "rules/annotation.smk"
+#include: "rules/annotation.smk"
 include: "rules/qc.smk"
 # results
 # NEEDS UPDATE, DO NOT RUN!!!!

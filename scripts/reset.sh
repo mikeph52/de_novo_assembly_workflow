@@ -20,14 +20,16 @@ echo ""
 read -p "Continue? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
 # scripts/ --> parent
 cd ..
-
+# STEP 1: rm directories
 rm -rf data/ logs/ results/ 
-
+# STEP 2: move setup.sh to parent
 PROJECT=$(cat scripts/.setup.env)
 # parent --> prev
 cd ..
+mv "$PROJECT"/scripts/setup.sh "$PROJECT"
+# STEP 3: rename proj to default
 mv "$PROJECT" de_novo_genome_assembly_workflow
-
+# STEP 4: remove snakemake env
 conda env remove -n snakemake
 
 echo "Process finished"

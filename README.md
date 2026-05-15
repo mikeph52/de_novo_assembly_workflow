@@ -73,6 +73,8 @@ Some recomended options on threads:
 | annotation | 16 |
 | nanoplot | 4 |
 | quast | 8 |
+| busco | 16 |
+| multiqc | 8 |
 
 ### Depedencies
 - **Flye**
