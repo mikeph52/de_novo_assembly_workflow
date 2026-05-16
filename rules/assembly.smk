@@ -36,7 +36,7 @@ rule hifiasm_assembly:
     input:
         fastq = "results/trim_adapters/{sample}_trimmed.fastq.gz"
     output:
-        fasta  = "results/assembly/hifiasm/{sample}.p_ctg.fasta",
+        fasta  = "results/assembly/hifiasm/{sample}_assembly.fasta",
     params:
         outdir = "results/assembly/hifiasm/{sample}",
         extra = config["hifiasm"]["extra_args"],
@@ -60,7 +60,7 @@ rule hifiasm_assembly:
         echo "$(date): Hifiasm completed."
         echo "$(date): Converting gfa to FASTA..."
         # convert .gfa to fasta
-        awk '/^S/{print ">"$2"\n"$3}' results/assembly/hifiasm/{sample}.bp.p_ctg.gfa > results/assembly/hifiasm/{sample}.p_ctg.fasta
+        awk '/^S/{print ">"$2"\n"$3}' results/assembly/hifiasm/{sample}.bp.p_ctg.gfa > results/assembly/hifiasm/{sample}_assembly.fasta
 
         echo "$(date): Conversion completed."
         echo "$(date): Assembly completed."
