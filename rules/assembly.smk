@@ -6,15 +6,20 @@ rule flye_assembly:
         info   = "results/assembly/flye/{sample}_assembly_info.txt",
         graph  = "results/assembly/flye/{sample}_assembly_graph.gfa",
     params:
-        outdir = "results/assembly/flye",
+        outdir = "results/assembly/flye/{sample}", 
         read_type = config["flye"]["read_type"],
         genome_sz = config["genome_size"],
         extra     = config["flye"]["extra_args"],
     threads: config["threads"]["flye"]
-    conda: "/envs/assembly.yaml"
-    log: "logs/flye.log"
+    conda: "envs/assembly.yaml"
+    log: "logs/flye/flye.log"
     shell:
         """
+        mkdir -p logs/flye/
+        mkdir -p results/assembly/flye/{sample}
+
+        echo "$(date): Flye is starting..."
+
         flye \
             {params.read_type} {input.fastq} \
             --genome-size {params.genome_sz} \
@@ -22,6 +27,9 @@ rule flye_assembly:
             --threads {threads} \
             {params.extra} \
             2> {log}
+
+        echo "$(date): Flye completed."
+        echo "$(date): Assembly completed."
         """
 
 rule hifiasm_assembly:
@@ -32,18 +40,31 @@ rule hifiasm_assembly:
         info   = "results/assembly/hifiasm/{sample}_assembly_info.txt",
         graph  = "results/assembly/hifiasm/{sample}_assembly_graph.gfa",
     params:
-        outdir    = "results/assembly/hifiasm",
+        outdir    = "results/assembly/hifiasm/{sample}",
         extra     = config["hifiasm"]["extra_args"],
     threads: config["threads"]["hifiasm"]
-    conda:  "/envs/assembly.yaml"
-    log:    "logs/hifiasm.log"
+    conda:  "envs/assembly.yaml"
+    log:    "logs/hifiasm/hifiasm.log"
     shell:
         """
+        mkdir -p logs/hifiasm/
+        mkdir -p results/assembly/hifiasm/{sample}
+
+        echo "$(date): Hifiasm is starting..."
+
         hifiasm \
-            -o {params.outdir}/assembly \
+            -o {params.outdir} \
             -t {threads} \
             {params.extra} \
             {input.fastq} \
             2> {log}
+
+        echo "$(date): Hifiasm completed."
+        echo "$(date): Converting gfa to FASTA..."
+        # convert .gfa to fasta
+        awk '/^S/{print ">"$2"\n"$3}' results/assembly/hifiasm/{sample}.bp.p_ctg.gfa > results/assembly/hifiasm/{sample}.p_ctg.fasta
+
+        echo "$(date): Conversion completed."
+        echo "$(date): Assembly completed."
         """
 

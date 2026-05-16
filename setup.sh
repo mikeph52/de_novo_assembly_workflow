@@ -38,7 +38,7 @@ mkdir data logs results
 echo "Creating subdfolders on: data/ results/..."
 mkdir -p data/kraken2 data/
 mkdir -p results/sort_bam results/trim_adapters results/assembly results/purge_dups results/polish 
-mkdir -p results/assembly/flye results/assembly/hifiasm
+mkdir -p results/assembly/flye/ results/assembly/hifiasm/
 # STEP 4
 echo "Checking conda installation..."
 if ! command -v conda &> /dev/null; then
