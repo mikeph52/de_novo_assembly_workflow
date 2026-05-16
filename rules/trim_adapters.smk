@@ -10,12 +10,15 @@ rule sort_bam:
     conda: "envs/trim_adapters.yaml"
     shell:
         """
+        echo "$(date): Trimming adapters is starting (rules/trim_adapters.smk)..."
+        echo "$(date): Samtools is starting..."
         echo "SORTING STARTED" >> {log}
         samtools sort -n -@ {threads} -m 2G -o {output.sorted_bam} {input.bam} 2>> {log}
         echo "SORTING ENDED, CONVERSION STARTED" >> {log}
         # switch to gzip
         samtools fastq -@ {threads} {output.sorted_bam} | bgzip -@ {threads} > {output.fastq} 2>> {log}
         echo "CONVERSION ENDED" >> {log}
+        echo "$(date): Samtools completed"
         """
 
 rule porechop:
@@ -29,5 +32,8 @@ rule porechop:
     conda: "envs/trim_adapters.yaml"
     shell:
         """
+        echo "$(date): Porechop is starting..."
         porechop -i {input.fastq} -o {output.trimmed} --threads {threads} 2>> {log}
+        echo "$(date): Porechop completed"
+        echo "$(date): Trimming adapters completed.
         """

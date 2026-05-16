@@ -17,7 +17,7 @@ rule flye_assembly:
         """
         mkdir -p logs/flye/
         mkdir -p results/assembly/flye/{sample}
-
+        echo "$(date): Assembly is starting (rules/assembly.smk)..."
         echo "$(date): Flye is starting..."
 
         flye \
@@ -36,12 +36,10 @@ rule hifiasm_assembly:
     input:
         fastq = "results/trim_adapters/{sample}_trimmed.fastq.gz"
     output:
-        fasta  = "results/assembly/hifiasm/{sample}_assembly.fasta",
-        info   = "results/assembly/hifiasm/{sample}_assembly_info.txt",
-        graph  = "results/assembly/hifiasm/{sample}_assembly_graph.gfa",
+        fasta  = "results/assembly/hifiasm/{sample}.p_ctg.fasta",
     params:
-        outdir    = "results/assembly/hifiasm/{sample}",
-        extra     = config["hifiasm"]["extra_args"],
+        outdir = "results/assembly/hifiasm/{sample}",
+        extra = config["hifiasm"]["extra_args"],
     threads: config["threads"]["hifiasm"]
     conda:  "envs/assembly.yaml"
     log:    "logs/hifiasm/hifiasm.log"
@@ -49,7 +47,7 @@ rule hifiasm_assembly:
         """
         mkdir -p logs/hifiasm/
         mkdir -p results/assembly/hifiasm/{sample}
-
+        echo "$(date): Assembly is starting (rules/assembly.smk)..."
         echo "$(date): Hifiasm is starting..."
 
         hifiasm \
