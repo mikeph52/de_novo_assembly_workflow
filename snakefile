@@ -12,34 +12,23 @@ ASSEMBLER = config.get("assembler", "flye")
 # If you want to skip any steps, just comment the rules bellow
 include: "rules/trim_adapters.smk"
 include: "rules/assembly.smk"
-include: "rules/polish.smk"
+include: "rules/polish.smk" #only for ONT
 include: "rules/rm_haplotigs.smk"
 #include: "rules/custom_k2_db.smk"   # uncomment if you want to built a custom db for kraken2
 include: "rules/decontamination.smk"
 include: "rules/masking.smk"
-#include: "rules/annotation.smk"
 include: "rules/qc.smk"
 # results
 # NEEDS UPDATE, DO NOT RUN!!!!
 rule all:
     input:
-        expand("results/qc/nanoplot/{sample}_raw/NanoStats.txt", sample=SAMPLES),
-
+        expand("results/qc/nanostat/{sample}_raw/NanoStats.txt", sample=SAMPLES),
         expand("results/trim_adapters/{sample}_trimmed.fastq.gz", sample=SAMPLES),
-
-        expand("results/qc/nanoplot/{sample}_trimmed/NanoStats.txt", sample=SAMPLES),
-        
         expand("results/assembly/{assembler}/{sample}_assembly.fasta", assembler=ASSEMBLER, sample=SAMPLES),
-
         expand("results/polish/medaka/{sample}_polished.fasta", sample=SAMPLES),
-
         expand("results/purge_dups/{sample}_purged.fa", sample=SAMPLES),
-
         expand("results/decontamination/{sample}_dec.fa", sample=SAMPLES),
-
         expand("results/masking/{sample}_masked.fa", sample=SAMPLES),
-
-        expand("results/annotation/{sample}/{sample}.gff3", sample=SAMPLES),
 
         # MultiQC summary need to add BUSCO
         #"results/qc/multiqc/multiqc_report.html",

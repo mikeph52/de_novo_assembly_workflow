@@ -6,13 +6,14 @@ rule sort_bam:
         fastq = "results/sort_bam/{sample}.fastq.gz"
     log:
         "logs/sort_bam/{sample}.log"
-    threads: 20
+    threads: config["threads"]["samtools"]
     conda: "envs/trim_adapters.yaml"
     shell:
         """
         echo "SORTING STARTED" >> {log}
         samtools sort -n -@ {threads} -m 2G -o {output.sorted_bam} {input.bam} 2>> {log}
         echo "SORTING ENDED, CONVERSION STARTED" >> {log}
+        # switch to gzip
         samtools fastq -@ {threads} {output.sorted_bam} | bgzip -@ {threads} > {output.fastq} 2>> {log}
         echo "CONVERSION ENDED" >> {log}
         """
@@ -24,7 +25,7 @@ rule porechop:
         trimmed = "results/trim_adapters/{sample}_trimmed.fastq.gz"
     log:
         "logs/trim_adapters/{sample}.log"
-    threads: 8
+    threads: config["threads"]["porechop"]
     conda: "envs/trim_adapters.yaml"
     shell:
         """
