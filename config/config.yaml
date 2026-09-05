@@ -13,7 +13,6 @@ genome_size: "500000000"
 
 threads:
   samtools: 16
-  porechop: 16
   flye: 32
   hifiasm: 32
   medaka: 8 # still idkno if im gonna use it
@@ -22,7 +21,7 @@ threads:
   quast: 8
   busco: 16
   multiqc: 8
-  nanostat: 8 # i found an alternative: cramino https://github.com/wdecoster/cramino
+  nanostat: 8
 
 flye:
   read_type: "--nano-hq"    # --nano-raw # --nano-hq # --pacbio-raw # --pacbio-hifi
