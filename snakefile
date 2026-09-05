@@ -5,7 +5,7 @@ import glob
 # This is the config file
 configfile: "config/config.yaml"
 
-W_VERSION = "0.22.2"
+W_VERSION = "0.23.1"
 SAMPLES  = config["samples"]
 ASSEMBLER = config["assembler"]
 
