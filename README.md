@@ -10,38 +10,46 @@ The pipeline is based on the one used in _De Novo Genome Assembly for an Endange
 ## Workflow
 ### Pipeline structure
 
-![](docs/snakemake_workflow_3.png)
+![](docs/workflow_label.png)
 
 ### Project structure
 ```bash
 .
-├── config
-│   └── config.yaml
-├── data
-├── docs
-├── benchmarks
-├── kraken2_db.sh
 ├── LICENSE
-├── logs
 ├── README.md
-├── results
+├── config
+│   └── config.yaml
+├── dcs_reference.fasta
+├── docs
+│   ├── benchmarks.md
+│   ├── guide.md
+│   ├── snakemake_workflow.png
+│   ├── snakemake_workflow_2.png
+│   ├── snakemake_workflow_3.png
+│   ├── workflow_label.png
+│   └── workflow_nolabel.png
+├── kraken2_db.sh
 ├── rules
-│   ├── assembly.smk
-│   ├── custom_k2_db.smk
-│   ├── decontamination.smk
-│   ├── envs
-│   │   ├── assembly.yaml
-│   │   ├── decontamination.yaml
-│   │   ├── polish.yaml
-│   │   ├── qc.yaml
-│   │   ├── rm_haplotigs.yaml
-│   │   └── trim_adapters.yaml
-│   ├── polish.smk
-│   ├── qc.smk
-│   ├── rm_haplotigs.smk
-│   └── trim_adapters.smk
-├── scripts
-│   └── reset.sh
+│   ├── assembly.smk
+│   ├── custom_k2_db.smk
+│   ├── decontamination.smk
+│   ├── envs
+│   │   ├── assembly.yaml
+│   │   ├── decontamination.yaml
+│   │   ├── plots.yaml
+│   │   ├── polish.yaml
+│   │   ├── qc.yaml
+│   │   ├── rm_haplotigs.yaml
+│   │   └── trim_adapters.yaml
+│   ├── plots.smk
+│   ├── polish.smk
+│   ├── qc.smk
+│   ├── rm_haplotigs.smk
+│   ├── scripts
+│   │   ├── cleanup.sh
+│   │   ├── plots.py
+│   │   └── reset.sh
+│   └── trim_adapters.smk
 ├── setup.sh
 ├── snakefile
 └── workflow.sh
